@@ -1,11 +1,10 @@
 """
 TODO: Add description
 """
+from queue import Queue
 from abs import ABC, abstractmethod
 
-from clock import Clock
 from task.task import Task
-# from somewhere import Queue
 from machine.machine import Machine
 
 
@@ -18,7 +17,7 @@ class baseAbsScheduler(ABC):
         super().__init__()
         self._name = name
         # self._stats =
-        # self._queue =
+        self._queue = Queue()
 
     @property
     def name(self) -> str:
@@ -53,19 +52,19 @@ class baseAbsScheduler(ABC):
 
 
     def choose(self) -> Task:
-        #for fcfs
-        task = Queue.pop()
+        #assume fcfs
+        task = self._queue.pop()
+        return task
     
     def admit(self, task: Task) -> bool:
         pass
-    
 
     def allocate(self, task: Task) -> Machine:
         machine.running = task
         
-
     def schedule(self, task: Task):  
         task = self.choose()
+
         if machine.is_empty():
             machine = self.allocate(task)
     
@@ -76,7 +75,7 @@ class baseAbsScheduler(ABC):
         pass
 
     def is_empty(self) -> bool:
-        if machine.running:        #how to see if machine is empty? i dont know how to access "machine", should it be defined in the init?
+        if machine.running:   #how to see if machine is empty? i dont know how to access "machine", should it be defined in the init?
             return False
         return True
 
