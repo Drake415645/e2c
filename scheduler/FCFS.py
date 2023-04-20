@@ -1,24 +1,25 @@
 """
-TODO: Add description
+
+TODO: add description
+
 """
 from queue import Queue
-from abs import ABC, abstractmethod
 
 from task.task import Task
 from machine.machine import Machine
+from base_abs_scheduler import BaseAbsScheduler
 
-
-class BaseAbsScheduler(ABC):
+class FCFS(BaseAbsScheduler):
     """
-
-    TODO: Class description
     
+    TODO: add description
+
     """
 
-    def __init__(self, name: str) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self._name = name
-        # self._stats =
+        self._name = "FCFS"
+        self._stats 
         self._queue = Queue()
 
     @property
@@ -52,11 +53,8 @@ class BaseAbsScheduler(ABC):
         self._queue = queue
 
 
-
     def choose(self) -> Task:
-        #assume fcfs
-        task = self._queue.pop()
-        return task
+        task = Queue.pop()
     
     def admit(self, task: Task) -> bool:
         pass
@@ -66,7 +64,6 @@ class BaseAbsScheduler(ABC):
         
     def schedule(self, task: Task):  
         task = self.choose()
-
         if machine.is_empty():
             machine = self.allocate(task)
     
@@ -77,7 +74,7 @@ class BaseAbsScheduler(ABC):
         pass
 
     def is_empty(self) -> bool:
-        if machine.running:   #how to see if machine is empty? i dont know how to access "machine", should it be defined in the init?
+        if machine.running:        #how to see if machine is empty? i dont know how to access "machine", should it be defined in the init?
             return False
         return True
 
